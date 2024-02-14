@@ -19,27 +19,51 @@ def maxProfit( prices: List[int]) -> int:
 #     return max_dif
                 
         
-    left_pointer = 0 
-    right_pointer = len(prices) -1 
+    # left_pointer = 0 
+    # right_pointer = len(prices) -1 
 
-    left_min = prices[left_pointer]
-    right_max = prices[right_pointer]
+    # left_min = prices[left_pointer]
+    # right_max = prices[right_pointer]
     
-    while(left_pointer <= right_pointer and left_pointer < len(prices) and right_pointer > 0):
+    # while(left_pointer <= right_pointer and left_pointer < len(prices) and right_pointer > 0):
 
-        left_value = prices[left_pointer]
-        right_value = prices[right_pointer]
-        if(left_value < left_min):
-            left_min = left_value
-        if(right_value > right_max):
-            right_max =right_value
-        left_pointer += 1
-        right_pointer -= 1
-    print("L :", left_min)
-    print("R : ", right_max)
-    differance = right_max  - left_min
-    if(differance < 0):
-        return 0
-    return right_max - left_min
+    #     left_value = prices[left_pointer]
+    #     right_value = prices[right_pointer]
+    #     if(left_value < left_min):
+    #         left_min = left_value
+    #     if(right_value > right_max):
+    #         right_max =right_value
+    #     left_pointer += 1
+    #     right_pointer -= 1
+    # print("L :", left_min)
+    # print("R : ", right_max)
+    # differance = right_max  - left_min
+    # if(differance < 0):
+    #     return 0
+    # return right_max - left_min
+    
+    left = 0
+    right = 1
+    max_diff = 0
+    while( right < len(prices)):
+        left_value = prices[left]
+        right_value = prices[right]
+        
+        diff = right_value - left_value
+        if(diff < 0):
+            left  = right
+            right += 1 
+            continue
+        if(diff > max_diff):
+            max_diff = diff
+            left = right
+            right += 1 
+            continue 
+        if(diff > 0):
+            right += 1
+            continue
+    return max_diff
+            
+        
 test_value = maxProfit([3,2,6,5,0,3])
 print(test_value)
